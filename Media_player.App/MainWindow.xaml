@@ -1,0 +1,71 @@
+﻿<Window x:Class="Media_player.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Media_player.App"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <MediaElement Source="media\numbers.wmv" Name="myMediaElement" 
+            Width="450" Height="250" LoadedBehavior="Manual" UnloadedBehavior="Stop" Stretch="Fill" 
+            Grid.Row="0"/>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Grid.Column="0" Grid.Row="0" 
+                Content="Play"   
+                Click="Button_Click"/>
+                
+                <Button Grid.Column="1" Grid.Row="0"
+                Content="Stop"
+                Click="Button_Click_stop"/>
+
+                <Button Grid.Column="0" Grid.Row="1"
+                Content="Open"
+                Click="Button_Click_Open"/>
+
+                <Button Grid.Column="1" Grid.Row="1"
+                        Content="Pause"
+                        Click="Button_Click_Pause"/>
+            </Grid>
+        </Grid>
+
+
+        <ListView Grid.Column="0" x:Name="MusicsList"
+                 ItemsSource="{Binding MusicList}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding SongName}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        
+        
+
+        
+        
+
+
+    </Grid>
+</Window>
