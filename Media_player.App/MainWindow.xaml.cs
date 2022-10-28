@@ -27,7 +27,10 @@ namespace Media_player.App
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+
         public ObservableCollection<Music> MusicList { get; set; }
+
+        private Music selected_music;
         public MainWindow()
         {
             MusicList = new ObservableCollection<Music>();
@@ -46,9 +49,7 @@ namespace Media_player.App
             {
                 string selectedFileName = dlg.FileName;
 
-                //Name = dlg.FileName;
-
-                MusicList.Add(new Music(dlg.SafeFileName, dlg.FileName));
+                MusicList.Add(new Music(dlg.FileName));
 
                 myMediaElement.Source = new Uri(selectedFileName);
 
@@ -57,6 +58,15 @@ namespace Media_player.App
 
         }
 
+       public Music SelectedMusic { 
+            get { return selected_music; }
+            set
+            {
+                selected_music = value;
+                OnPropertyChanged("SelectedMusic");
+            }
+        }
+        
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -91,6 +101,10 @@ namespace Media_player.App
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            myMediaElement.Source= new Uri(selected_music.SongName);
+        }
     }
 
 
